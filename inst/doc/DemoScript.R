@@ -26,7 +26,7 @@ pheatmap(BinMat,cluster_rows = FALSE,cluster_cols = FALSE,
          col=c('white','blue'))
 
 ## -----------------------------------------------------------------------------
-#visualising original matrix
+#visualising sorted matrix
 pheatmap(sortedMat,cluster_rows = FALSE,cluster_cols = FALSE,
          legend = FALSE,show_colnames = FALSE,show_rownames = FALSE,main='Sorted Matrix',
          col=c('white','blue'))
