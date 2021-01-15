@@ -1,0 +1,8 @@
+import(pheatmap)
+
+## exported functions
+export('MExMaS.HeuristicMutExSorting')
+export('MExMaS.findBestInClass')
+export('MExMaS.rearrangeMatrix')
+
+exportPattern("^[[:alpha:]]+")
