@@ -2,8 +2,17 @@ MExMaS.HeuristicMutExSorting<-function(mutPatterns){
 
   mutPatterns<-sign(mutPatterns)
 
+  ngenes<-nrow(mutPatterns) 
   nsamples<-ncol(mutPatterns)
+  
+  if (is.null(rownames(mutPatterns))){
+    rownames(mutPatterns) <- 1:ngenes
+  }
 
+  if (is.null(colnames(mutPatterns))){
+    colnames(mutPatterns) <- 1:nsamples
+  }
+  
   coveredGenes<-NA
   uncoveredGenes<-rownames(mutPatterns)
 
