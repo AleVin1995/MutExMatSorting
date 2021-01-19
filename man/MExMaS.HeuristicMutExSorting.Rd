@@ -30,3 +30,4 @@ pheatmap(mutPatterns,cluster_rows = FALSE,cluster_cols = FALSE,legend = FALSE,
 pheatmap(sortedMat,cluster_rows = FALSE,cluster_cols = FALSE,legend = FALSE,
   show_colnames = FALSE,show_rownames = FALSE,main='Sorted Matrix',col=c('white','blue'))
 }
+\keyword{MutExMatSorting}
