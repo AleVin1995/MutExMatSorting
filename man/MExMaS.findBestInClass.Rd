@@ -32,3 +32,4 @@ patterns<-matrix(c(mutPatterns[,idNonNull]),
 BS<-MExMaS.findBestInClass(patterns)
 BS
 }
+\keyword{MutExMatSorting}
