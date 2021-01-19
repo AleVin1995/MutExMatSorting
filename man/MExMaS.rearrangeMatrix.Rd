@@ -84,3 +84,4 @@ GENES<-c(BS,uncoveredGenes)
 CID<-MExMaS.rearrangeMatrix(mutPatterns,GENES)
 CID
 }
+\keyword{MutExMatSorting}
