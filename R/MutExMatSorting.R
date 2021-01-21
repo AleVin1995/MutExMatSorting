@@ -12,21 +12,22 @@ MExMaS.HeuristicMutExSorting<-function(mutPatterns){
   if (is.null(colnames(mutPatterns))){
     colnames(mutPatterns) <- 1:nsamples
   }
-  
-  coveredGenes<-NA
-  uncoveredGenes<-rownames(mutPatterns)
 
-  if (length(uncoveredGenes)>1){
+  if (nrow(mutPatterns)>1){
+    
+    RowNull<-names(which(rowSums(mutPatterns)==0))
+    RowNonNull<-which(rowSums(mutPatterns)>0)
+    
+    ColNull<-names(which(colSums(mutPatterns)==0))
+    ColNonNull<-which(colSums(mutPatterns)>0)
+    
+    mutPatterns<-matrix(c(mutPatterns[RowNonNull,ColNonNull]),
+                        length(RowNonNull),length(ColNonNull),
+                        dimnames=list(rownames(mutPatterns)[RowNonNull],colnames(mutPatterns)[ColNonNull]))
 
-    idNull<-which(colSums(mutPatterns)==0)
-    nullCol<-matrix(c(mutPatterns[,idNull]),nrow(mutPatterns),
-                    length(idNull),dimnames = list(rownames(mutPatterns),colnames(mutPatterns)[idNull]))
-
-    idNonNull<-which(colSums(mutPatterns)>0)
-    mutPatterns<-matrix(c(mutPatterns[,idNonNull]),
-                        nrow(mutPatterns),length(idNonNull),
-                        dimnames=list(rownames(mutPatterns),colnames(mutPatterns)[idNonNull]))
-
+    coveredGenes<-NA
+    uncoveredGenes<-rownames(mutPatterns)
+    
     coveredSamples<-NA
     uncoveredSamples<-colnames(mutPatterns)
     BS<-NA
@@ -75,7 +76,15 @@ MExMaS.HeuristicMutExSorting<-function(mutPatterns){
 
     FINALMAT<-mutPatterns[BS,CID]
 
-    FINALMAT<-cbind(FINALMAT,nullCol[rownames(FINALMAT),])
+    nullCol<-matrix(0,nrow(FINALMAT),length(ColNull),
+                    dimnames = list(rownames(FINALMAT),ColNull))
+    
+    FINALMAT<-cbind(FINALMAT,nullCol)
+    
+    nullRow<-matrix(0,length(RowNull),ncol(FINALMAT),
+                    dimnames = list(RowNull,colnames(FINALMAT)))
+    
+    FINALMAT<-rbind(FINALMAT,nullRow)
 
     return(FINALMAT)
   }
