@@ -24,70 +24,75 @@ MExMaS.HeuristicMutExSorting<-function(mutPatterns){
     mutPatterns<-matrix(c(mutPatterns[RowNonNull,ColNonNull]),
                         length(RowNonNull),length(ColNonNull),
                         dimnames=list(rownames(mutPatterns)[RowNonNull],colnames(mutPatterns)[ColNonNull]))
-
-    coveredGenes<-NA
-    uncoveredGenes<-rownames(mutPatterns)
     
-    coveredSamples<-NA
-    uncoveredSamples<-colnames(mutPatterns)
-    BS<-NA
+    if (nrow(mutPatterns)>1 & ncol(mutPatterns)>1){
 
-    while(length(uncoveredGenes)>0 & length(uncoveredSamples)>0){
-
-      patterns<-matrix(c(mutPatterns[uncoveredGenes,uncoveredSamples]),
-                       nrow = length(uncoveredGenes),
-                       ncol = length(uncoveredSamples),
-                       dimnames = list(uncoveredGenes,uncoveredSamples))
-
-      if(length(uncoveredGenes)>1){
-        bestInClass<-MExMaS.findBestInClass(patterns)
-      }else{
-        bestInClass<-uncoveredGenes
+      coveredGenes<-NA
+      uncoveredGenes<-rownames(mutPatterns)
+      
+      coveredSamples<-NA
+      uncoveredSamples<-colnames(mutPatterns)
+      BS<-NA
+  
+      while(length(uncoveredGenes)>0 & length(uncoveredSamples)>0){
+  
+        patterns<-matrix(c(mutPatterns[uncoveredGenes,uncoveredSamples]),
+                         nrow = length(uncoveredGenes),
+                         ncol = length(uncoveredSamples),
+                         dimnames = list(uncoveredGenes,uncoveredSamples))
+  
+        if(length(uncoveredGenes)>1){
+          bestInClass<-MExMaS.findBestInClass(patterns)
+        }else{
+          bestInClass<-uncoveredGenes
+        }
+  
+        if(is.na(BS[1])){
+          BS<-bestInClass
+        }else{
+          BS<-c(BS,bestInClass)
+        }
+  
+        if(is.na(coveredGenes[1])){
+          coveredGenes<-bestInClass
+        }else{
+          coveredGenes<-c(coveredGenes,bestInClass)
+        }
+  
+        uncoveredGenes<-setdiff(uncoveredGenes,coveredGenes)
+        toCheck<-matrix(c(patterns[bestInClass,uncoveredSamples]),nrow = 1,ncol=ncol(patterns),dimnames = list(bestInClass,uncoveredSamples))
+  
+        if (length(coveredGenes)==1){
+          coveredSamples<-names(which(colSums(toCheck)>0))
+        }else{
+          coveredSamples<-c(coveredSamples,names(which(colSums(toCheck)>0)))
+        }
+  
+        uncoveredSamples<-setdiff(uncoveredSamples,coveredSamples)
+  
       }
-
-      if(is.na(BS[1])){
-        BS<-bestInClass
-      }else{
-        BS<-c(BS,bestInClass)
-      }
-
-      if(is.na(coveredGenes[1])){
-        coveredGenes<-bestInClass
-      }else{
-        coveredGenes<-c(coveredGenes,bestInClass)
-      }
-
-      uncoveredGenes<-setdiff(uncoveredGenes,coveredGenes)
-      toCheck<-matrix(c(patterns[bestInClass,uncoveredSamples]),nrow = 1,ncol=ncol(patterns),dimnames = list(bestInClass,uncoveredSamples))
-
-      if (length(coveredGenes)==1){
-        coveredSamples<-names(which(colSums(toCheck)>0))
-      }else{
-        coveredSamples<-c(coveredSamples,names(which(colSums(toCheck)>0)))
-      }
-
-      uncoveredSamples<-setdiff(uncoveredSamples,coveredSamples)
-
+  
+      BS<-c(BS,uncoveredGenes)
+  
+      CID<-MExMaS.rearrangeMatrix(mutPatterns,BS)
+  
+      FINALMAT<-mutPatterns[BS,CID]
+  
+      nullCol<-matrix(0,nrow(FINALMAT),length(ColNull),
+                      dimnames = list(rownames(FINALMAT),ColNull))
+      
+      FINALMAT<-cbind(FINALMAT,nullCol)
+      
+      nullRow<-matrix(0,length(RowNull),ncol(FINALMAT),
+                      dimnames = list(RowNull,colnames(FINALMAT)))
+      
+      FINALMAT<-rbind(FINALMAT,nullRow)
+  
+      return(FINALMAT)
+      
+    } else {
+      stop('Matrix must have at least 2 non-null rows and 2 non-null columns')
     }
-
-    BS<-c(BS,uncoveredGenes)
-
-    CID<-MExMaS.rearrangeMatrix(mutPatterns,BS)
-
-    FINALMAT<-mutPatterns[BS,CID]
-
-    nullCol<-matrix(0,nrow(FINALMAT),length(ColNull),
-                    dimnames = list(rownames(FINALMAT),ColNull))
-    
-    FINALMAT<-cbind(FINALMAT,nullCol)
-    
-    nullRow<-matrix(0,length(RowNull),ncol(FINALMAT),
-                    dimnames = list(RowNull,colnames(FINALMAT)))
-    
-    FINALMAT<-rbind(FINALMAT,nullRow)
-
-    return(FINALMAT)
-    
   } else {
     stop('Matrix must have at least 2 rows and 2 columns') 
   }
