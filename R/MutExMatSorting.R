@@ -13,7 +13,7 @@ MExMaS.HeuristicMutExSorting<-function(mutPatterns){
     colnames(mutPatterns) <- 1:nsamples
   }
 
-  if (nrow(mutPatterns)>1){
+  if (nrow(mutPatterns)>1 & ncol(mutPatterns)>1){
     
     RowNull<-names(which(rowSums(mutPatterns)==0))
     RowNonNull<-which(rowSums(mutPatterns)>0)
@@ -87,9 +87,12 @@ MExMaS.HeuristicMutExSorting<-function(mutPatterns){
     FINALMAT<-rbind(FINALMAT,nullRow)
 
     return(FINALMAT)
+    
+  } else {
+    stop('Matrix must have at least 2 rows and 2 columns') 
   }
-
 }
+
 MExMaS.findBestInClass<-function(patterns){
 
   if(nrow(patterns)==1){
@@ -105,6 +108,7 @@ MExMaS.findBestInClass<-function(patterns){
 
   return(names(sort(exclCov,decreasing=TRUE))[1])
 }
+
 MExMaS.rearrangeMatrix<-function(patterns,GENES){
 
   remainingSamples<-colnames(patterns)
