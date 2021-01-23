@@ -9,7 +9,13 @@ This package implements an heuristic algorithm that takes in input a sparse bina
 Install
 --
 
-Install the R package [`devtools`](https://cran.r-project.org/web/packages/devtools/readme/README.html) and then install `MutExMatSorting`
+Install the R package via CRAN:
+
+```
+install.packages("MutExMatSorting")
+```
+
+Or install it via devtools:
 
 ```
 install.packages("devtools")
