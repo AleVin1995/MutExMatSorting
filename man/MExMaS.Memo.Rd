@@ -23,5 +23,3 @@ mutPatterns[sample(r*c,round(r*c*dens))] <- 1
 
 # Executing mutual exclusivity sorting
 sortedMat <- MExMaS.Memo(mutPatterns)
-
-\keyword{MutExMatSorting}
