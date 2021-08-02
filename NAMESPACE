@@ -1,6 +1,6 @@
 import(pheatmap)
 
-## exported functions
+# exported functions
 export('MExMaS.HeuristicMutExSorting')
 export('MExMaS.Memo')
 
