@@ -147,7 +147,7 @@ MExMaS.HeuristicMutExSorting <- function(mutPatterns, display = TRUE){
   return(toAdd)
 }
 
-MExMaS.Memo <- function(mutPatterns, display = TRUE){
+MExMaS.MEMo <- function(mutPatterns, display = TRUE){
   
   mutPatterns <- sign(mutPatterns)
   
@@ -203,12 +203,8 @@ MExMaS.Memo <- function(mutPatterns, display = TRUE){
 }
 
 .MExMaS.scoreCol <- function(x){
-  s <- 0
+  s <- 2^((length(x)-1):0)
+  s <- sum(s*x)
   
-  for (i in seq_along(x)){
-    if(x[i]){
-      s <- s + 2^(length(x)-i)
-    }
-  }
   return(s)
 }
