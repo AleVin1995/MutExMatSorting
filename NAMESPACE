@@ -3,6 +3,6 @@ import(pheatmap)
 
 # exported functions
 export('MExMaS.HeuristicMutExSorting')
-export('MExMaS.Memo')
+export('MExMaS.MEMo')
 
 exportPattern("^[[:alpha:]]+")
