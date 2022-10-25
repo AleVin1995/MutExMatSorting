@@ -1,5 +1,6 @@
 MExMaS.HeuristicMutExSorting <- function(mutPatterns, display = TRUE){
-
+  
+  mutPatterns <- as.matrix(mutPatterns)
   mutPatterns <- sign(mutPatterns)
 
   ngenes <- nrow(mutPatterns) 
@@ -149,6 +150,7 @@ MExMaS.HeuristicMutExSorting <- function(mutPatterns, display = TRUE){
 
 MExMaS.MEMo <- function(mutPatterns, display = TRUE){
   
+  mutPatterns <- as.matrix(mutPatterns)
   mutPatterns <- sign(mutPatterns)
   
   ngenes <- nrow(mutPatterns) 
@@ -182,6 +184,16 @@ MExMaS.MEMo <- function(mutPatterns, display = TRUE){
       CID <- names(sort(scores, decreasing = TRUE))
       
       FINALMAT <- mutPatterns[BS, CID]
+      
+      nullCol <- matrix(0, nrow(FINALMAT),length(ColNull),
+                        dimnames = list(rownames(FINALMAT),ColNull))
+      
+      FINALMAT <- cbind(FINALMAT, nullCol)
+      
+      nullRow <- matrix(0, length(RowNull),ncol(FINALMAT),
+                        dimnames = list(RowNull, colnames(FINALMAT)))
+      
+      FINALMAT <- rbind(FINALMAT, nullRow)
       
       if (display){
         ## original matrix
