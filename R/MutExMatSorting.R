@@ -1,5 +1,5 @@
 MExMaS.HeuristicMutExSorting <- function(mutPatterns, display = TRUE, cluster_rows = FALSE, cluster_cols = FALSE, legend = FALSE,
-                                         show_colnames = FALSE, show_rownames = FALSE, col = c('white','blue')){
+                                         show_rownames = FALSE, show_colnames = FALSE, col = c('white','blue')){
   
   mutPatterns <- as.matrix(mutPatterns)
   mutPatterns <- sign(mutPatterns)
@@ -94,10 +94,10 @@ MExMaS.HeuristicMutExSorting <- function(mutPatterns, display = TRUE, cluster_ro
       if (display){
         ## original matrix
         pheatmap::pheatmap(mutPatterns, cluster_rows = cluster_rows, cluster_cols = cluster_cols, legend = legend,
-                           show_colnames = show_colnames, show_rownames = show_rownames, main='Original Matrix', col = col)
+                           show_rownames = show_rownames, show_colnames = show_colnames, main='Original Matrix', col = col)
         ## sorted matrix
         pheatmap::pheatmap(FINALMAT, cluster_rows = cluster_rows, cluster_cols = cluster_cols, legend = legend,
-                           show_colnames = show_colnames, show_rownames = show_rownames, main='Sorted Matrix', col = col)
+                           show_rownames = show_rownames, show_colnames = show_colnames, main='Sorted Matrix', col = col)
       }
       return(FINALMAT)
       
@@ -150,7 +150,7 @@ MExMaS.HeuristicMutExSorting <- function(mutPatterns, display = TRUE, cluster_ro
 }
 
 MExMaS.MEMo <- function(mutPatterns, display = TRUE, cluster_rows = FALSE, cluster_cols = FALSE, legend = FALSE,
-                        show_colnames = FALSE, show_rownames = FALSE, col = c('white','blue')){
+                        show_rownames = FALSE, show_colnames = FALSE, col = c('white','blue')){
   
   mutPatterns <- as.matrix(mutPatterns)
   mutPatterns <- sign(mutPatterns)
@@ -200,10 +200,10 @@ MExMaS.MEMo <- function(mutPatterns, display = TRUE, cluster_rows = FALSE, clust
       if (display){
         ## original matrix
         pheatmap::pheatmap(mutPatterns, cluster_rows = cluster_rows, cluster_cols = cluster_cols, legend = legend,
-                           show_colnames = show_colnames, show_rownames = show_rownames, main='Original Matrix', col = col)
+                           show_rownames = show_rownames, show_colnames = show_colnames, main='Original Matrix', col = col)
         ## sorted matrix
         pheatmap::pheatmap(FINALMAT, cluster_rows = cluster_rows, cluster_cols = cluster_cols, legend = legend,
-                           show_colnames = show_colnames, show_rownames = show_rownames, main='Sorted Matrix', col = col)
+                           show_rownames = show_rownames, show_colnames = show_colnames, main='Sorted Matrix', col = col)
       }
       
       return(FINALMAT)
