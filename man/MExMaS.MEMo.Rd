@@ -1,8 +1,8 @@
-\name{MExMaS.Memo}
-\alias{MExMaS.Memo}
+\name{MExMaS.MEMo}
+\alias{MExMaS.MEMo}
 \title{OncoPrint sorting}
 \usage{
-MExMaS.Memo(mutPatterns, 
+MExMaS.MEMo(mutPatterns, 
             display = TRUE, 
             cluster_rows = FALSE, 
             cluster_cols = FALSE, 
@@ -12,7 +12,7 @@ MExMaS.Memo(mutPatterns,
             col = c('white','blue'))
 }
 \description{
-This function implements the sorting algorithm derived from Memo. It takes in input a sparse binary matrix and sorts its rows according to the numbers of non-null entries, whereas columns are sorted through a weighted scoring based on rows ordering.
+This function implements the sorting algorithm derived from MEMo. It takes in input a sparse binary matrix and sorts its rows according to the numbers of non-null entries, whereas columns are sorted through a weighted scoring based on rows ordering.
 }
 \arguments{
  \item{mutPatterns}{numeric binary matrix of the values to be sorted.}
@@ -35,5 +35,5 @@ mutPatterns <- matrix(0, r, c,dimnames = list(paste('row',1:r,sep=''),paste('col
 mutPatterns[sample(r*c,round(r*c*dens))] <- 1
 
 # Executing mutual exclusivity sorting
-sortedMat <- MExMaS.Memo(mutPatterns)
+sortedMat <- MExMaS.MEMo(mutPatterns)
 }
