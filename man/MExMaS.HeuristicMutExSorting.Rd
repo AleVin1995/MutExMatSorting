@@ -15,7 +15,7 @@ MExMaS.HeuristicMutExSorting(mutPatterns,
 This function implements an heuristic algrorithm that takes in input a sparse binary matrix and sorts its rows and column in a way that the patterns of non null entries have a minimal overalp across rows.
 }
 \arguments{
- \item{mutPatterns}{numeric binary matrix of the values to be sorted.}
+ \item{mutPatterns}{numeric binary matrix of the values to be sorted in the format (features x samples).}
  \item{display}{boolean, whether to display the original and sorted matrices. Default is true.}
  \item{cluster_rows}{boolean values determining if rows should be clustered.}
  \item{cluster_cols}{boolean values determining if columns should be clustered.}

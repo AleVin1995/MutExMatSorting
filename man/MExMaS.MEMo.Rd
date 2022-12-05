@@ -15,7 +15,7 @@ MExMaS.MEMo(mutPatterns,
 This function implements the sorting algorithm derived from MEMo. It takes in input a sparse binary matrix and sorts its rows according to the numbers of non-null entries, whereas columns are sorted through a weighted scoring based on rows ordering.
 }
 \arguments{
- \item{mutPatterns}{numeric binary matrix of the values to be sorted.}
+ \item{mutPatterns}{numeric binary matrix of the values to be sorted in the format (features x samples).}
  \item{display}{boolean, whether to display the original and sorted matrices. Default is true.}
  \item{cluster_rows}{boolean values determining if rows should be clustered.}
  \item{cluster_cols}{boolean values determining if columns should be clustered.}
